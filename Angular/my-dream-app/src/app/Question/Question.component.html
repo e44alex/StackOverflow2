@@ -1,0 +1,70 @@
+<div class="col-lg-10 offset-1">
+  
+    <h1 class="text-white display-1">{{question.topic}}</h1>
+    <div>
+      <p *ngIf="question.opened" class="text-white">
+        Discussion is opened
+      </p>
+      <p *ngIf="!question.opened" class="text-white">
+        Discussion closed
+      </p>
+    </div>
+
+    <div class="card text-white mb-5 bg-dark">
+      <div class="card-header">
+        <h2>
+          {{question.topic}}
+        </h2>
+      </div>
+      <div class="card-body">
+        {{question.body}}
+      </div>
+      <div class="card-footer">Created by: <a>{{question.creator.login}}</a> on {{question.dateCreated}}</div>
+    </div>
+    <div>
+      <h3>
+        <p class="text-white">  <b>{{question.answers.length}} answers</b></p>
+      </h3>
+
+      <div class="mt-5" *ngFor="let answer of question.answers">
+        <div class="card text-white m-2 bg-dark">
+          <div class="card-header">
+            <a href="/User/{{answer.creator.id}}">{{answer.creator.login}}</a>
+          </div>
+          <div class="card-body">{{answer.body}}</div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-sm-8">
+                Created on {{answer.dateCreated}}
+              </div>
+              <div class="col-sm-2">
+                <p>
+                  {{answer.users.length}} Liked this
+                </p>
+              </div>
+              
+              <div class="col-sm-2" *ngIf="getAuth">
+                <form method="post" >
+                  <input type="button" class="btn btn-secondary" value="Like" (click)='OnLikeButton(answer.id)' />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="question.opened && getAuth">
+      <div>
+        <h4 class="text-white">Add your own answer:</h4>
+      </div>
+      <div>
+        <form #answerForm="ngForm"  (ngSubmit)="OnAnswerSubmit(answerForm)">
+          <input name="questionId" hidden type="text" [(ngModel)]="question.id"/>
+          <textarea ngModel  required name="body" #body="ngModel" class="form-control mb-5 bg-dark text-white" placeholder="Enter your answer"></textarea>
+          <input type="submit" value="Send" class="btn btn-primary"/>
+        </form>
+      </div>
+    </div>
+</div>

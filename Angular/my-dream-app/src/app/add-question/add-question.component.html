@@ -1,0 +1,28 @@
+<div class="col-md-8 offset-2 mt-3">
+    <form >
+        <div class="card bg-dark">
+            <div class="card card-header">
+                <div class="form-group">
+                    <label for="topic" class="text text-light"><h1>Question topic</h1></label>
+                    <input required id="topic" class="form-control" type="text" name="topic" [(ngModel)]="questionTopic" #topic="ngModel">
+                    <div class="text text-danger" [hidden]="topic.valid || topic.untouched ">
+                        Topic required in order to help others to know what you're asking about
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="body" class="text text-light"><h2>Question:</h2></label>
+                    <textarea required id="body" class="form-control" type="text" name="body" [(ngModel)]="questionBody" #body="ngModel"></textarea> 
+                    <div class="text text-danger" [hidden]="body.valid || body.untouched  ">
+                        Say some words to help others to understand your question
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer col-md-1 offset-5">
+                <button type="submit" class="btn btn-primary" (click)="SendQuestion()">Send</button>
+            </div>
+        </div>
+    </form>
+</div>

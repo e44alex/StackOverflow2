@@ -1,0 +1,28 @@
+<div id="backDiv" class="body" >
+
+<nav class=" navbar navbar-expand-lg navbar-dark" style="background-color: rgba(22, 22, 22, 0.651);">
+  <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Stack_Overflow_icon.svg" width="30"
+    alt="">
+  <a class="navbar-brand" [routerLink]="['/']">Stackoverflow</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+  <div class="collapse navbar-collapse" id="collapsibleNavId">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <!-- Links on nav here -->
+      <ng-container *ngIf="getAuth">
+        <li  class="btn btn-outline-light" [routerLink]="['AskQuestion']">+ Ask your question</li>        
+      </ng-container>
+      
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="searchText" [(ngModel)]="searchText">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" [routerLink]="['Home', searchText]">Search</button>
+    </form>
+    <app-login-partial></app-login-partial>
+  </div>
+  </nav>
+
+  <div class="col-md-8 offset-2" style="background-color: rgba(22, 22, 22, 0.651);">
+    <router-outlet></router-outlet>
+  </div>
+</div>

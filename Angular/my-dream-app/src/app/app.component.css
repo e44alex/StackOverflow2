@@ -1,0 +1,11 @@
+.body{
+    height: fit-content;
+    min-height: 100%;
+    background: url("../assets/macbook_touchbar-wallpaper-5120x2880.jpg");
+    background-repeat: no-repeat ;
+    background-size:  cover;
+}
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
