@@ -1,0 +1,38 @@
+﻿@model StackOverflow.Models.User
+
+@{
+    ViewData["Title"] = Model.Name + " " + Model.Surname;
+    Layout = @Layout;
+
+}
+
+<h2> @ViewData["Title"] </h2>
+
+<form>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-md-3 col-form-label"></label>
+        <input asp-for="Email" class="form-control" type="email" name="name" disabled="disabled" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="PhoneNumber" class="col-md-3 col-form-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" type="tel" name="name" disabled="disabled" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Position" class="col-md-3 col-form-label"></label>
+        <input asp-for="Position" class="form-control" type="email" name="name" disabled="disabled" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Exerience" class="col-md-3 col-form-label"></label>
+        <input asp-for="Exerience" class="form-control" name="name" disabled="disabled" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Rating"></label>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: @Model.Rating%" aria-valuenow="@Model.Rating" aria-valuemin="0" aria-valuemax="100">@Model.Rating</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Bio" class="col-sm-3 col-form-label"></label>
+        <textarea asp-for="Bio" class="form-control" disabled="disabled"></textarea>
+    </div>
+</form>

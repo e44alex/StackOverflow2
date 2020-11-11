@@ -1,0 +1,63 @@
+﻿@model StackOverflow.Controllers.IndexViewModel
+
+@{
+    Layout = @Layout;
+}
+
+
+
+<div class="row">
+    <div class="col-lg-10">
+        <h2>Questions</h2>
+    </div>
+    <div class="col-lg-2">
+        <form asp-controller="Question" asp-action="Create" method="get">
+            <input type="submit" value="Ask a question" class="btn btn-primary"/>
+        </form>
+    </div>
+</div>
+<div>
+    @foreach (var question in Model.Questions)
+    {
+        <div class="card mb-2">
+            <div class="card-header">
+                <a asp-controller="Question" asp-action="Index" asp-route-id="@question.Id">
+                    <h2>@question.Topic</h2>
+                </a>
+            </div>
+            <div class="card-body">
+                @if (question.Body.Length > 100)
+                {
+                    @question.Body.Substring(0, 100);
+                    <p>...</p>
+                }
+                else
+                {
+                    @question.Body
+                }
+            </div>
+            <div class="card-footer">Created by: <a asp-controller="User" asp-action="UserPage" asp-route-id="@question.Creator.Id">@question.Creator.Name @question.Creator.Surname</a> on @question.DateCreated</div>
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="col-md-1">
+        @if (Model.VierwModel.HasPreviousPage)
+        {
+        <span>
+            <a class="btn btn-outline-info" asp-action="Home" asp-route-page="@(Model.VierwModel.PageNumber - 1)">Previous</a>
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </span>
+        }
+    </div>
+    <div class="col-md-10"></div>
+    <div class="col-md-1">
+        @if (Model.VierwModel.HasNextPage)
+        {
+            <span>
+                <a class="btn btn-outline-info" asp-action="Home" asp-route-page="@(Model.VierwModel.PageNumber + 1)">Next</a>
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        }
+    </div>
+</div>
