@@ -17,11 +17,6 @@ namespace StackOverflowTests
 {
     public class ApiClientTests
     {
-        [SetUp]
-        public void Setup()
-        {
-
-        }
 
         [Test]
         public async Task ApiClient_GetQuestions_ReturnsQuestionList()
