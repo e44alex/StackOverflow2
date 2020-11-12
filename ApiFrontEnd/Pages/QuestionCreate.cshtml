@@ -1,0 +1,44 @@
+﻿@page
+@model ApiFrontEnd.Pages.QuestionCreateModel
+@{
+    Layout = "_Layout";
+}
+
+<h2>Ask a question</h2>
+
+<div class="card">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger" />
+        <div class="card-header">
+            <div class="form-group form-group-lg">
+                <label asp-for="@Model.Question.Topic" class="control-label"></label>
+                <input asp-for="@Model.Question.Topic" class="form-control" placeholder="Enter a topic..." />
+                <span asp-validation-for="@Model.Question.Topic" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="form-group form-group-lg">
+                <div>
+                    <label asp-for="@Model.Question.Body" class="control-label"></label>
+                </div>
+                <div>
+                    <textarea asp-for="@Model.Question.Body" class="form-control" style="min-width: 100%" placeholder="Type you question here..."></textarea>
+                </div>
+                <div>
+                    <span asp-validation-for="@Model.Question.Body" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-page="./Index" class="btn btn-danger">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
