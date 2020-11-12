@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Net;
 using System.Threading.Tasks;
 using ApiFrontEnd.Pages;
@@ -14,7 +15,6 @@ namespace StackOverflowTests
 {
     public class QuestionAddPageTest
     {
-        [Ignore("HttpContext used")]
         [Test]
         public async Task QuestionCreatePage_OnPost_Works()
         {
@@ -26,19 +26,25 @@ namespace StackOverflowTests
             apiClientMock
                 .Setup(x => x.GetUserIdAsync("Username"))
                 .ReturnsAsync(Guid.NewGuid());
-            
 
-            var subjectUnderTest = new QuestionCreateModel(apiClientMock.Object);
-            subjectUnderTest.PageContext = new PageContext();
-            subjectUnderTest.PageContext.HttpContext = new DefaultHttpContext();
-            subjectUnderTest.PageContext.HttpContext.Response.Cookies.Append("token", "token");
-            subjectUnderTest.PageContext.HttpContext.Response.Cookies.Append("user", "token");
+            var requestCookieCollection = new Mock<IRequestCookieCollection>();
+            requestCookieCollection.Setup(x => x["token"]).Returns("token");
+            requestCookieCollection.Setup(x => x["user"]).Returns("user");
+
+            var httpContextMock = new Mock<HttpContext>();
+            httpContextMock.Setup(x => x.Request.Cookies)
+                .Returns(requestCookieCollection.Object);
+
+            var subjectUnderTest = new QuestionCreateModel(apiClientMock.Object)
+            {
+                PageContext = new PageContext {HttpContext = httpContextMock.Object}
+            };
+
             var question = new Question();
             var result = await subjectUnderTest.OnPostAsync(question);
 
             Assert.AreNotEqual(question.Id, Guid.Empty);
             Assert.IsNotNull(question.Creator);
-            Assert.AreNotEqual(question.Creator.Id, Guid.Empty);
             Assert.IsInstanceOf<RedirectResult>(result);
         }
     }

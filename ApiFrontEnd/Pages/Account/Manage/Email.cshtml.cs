@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using StackOverflowWebApi.Models;
 
 
-namespace StackOverflow.Areas.Identity.Pages.Account.Manage
+namespace ApiFrontEnd.Areas.Identity.Pages.Account.Manage
 {
     public partial class EmailModel : PageModel
     {

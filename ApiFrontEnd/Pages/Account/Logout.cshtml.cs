@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using StackOverflowWebApi.Models;
 using StackOverflowWebApi.Services;
 
-namespace StackOverflow.Areas.Identity.Pages.Account
+namespace ApiFrontEnd.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LogoutModel : PageModel

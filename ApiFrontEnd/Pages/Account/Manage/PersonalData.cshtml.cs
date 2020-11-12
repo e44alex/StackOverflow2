@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using StackOverflowWebApi.Models;
 
-namespace StackOverflow.Areas.Identity.Pages.Account.Manage
+namespace ApiFrontEnd.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {

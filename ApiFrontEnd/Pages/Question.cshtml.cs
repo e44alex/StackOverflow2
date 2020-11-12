@@ -44,7 +44,9 @@ namespace ApiFrontEnd.Pages
 
         public async Task<RedirectResult> OnPostLike(Answer answer, Question question)
         {
-            await _apiClient.LikeAnswerAsync(answer.Id, HttpContext.Request.Cookies["user"], HttpContext.Request.Cookies["token"].Decrypt());
+            await _apiClient.LikeAnswerAsync(answer.Id,
+                HttpContext.Request.Cookies["user"], 
+                HttpContext.Request.Cookies["token"].Decrypt());
 
             return Redirect($"/Question?id={question.Id}");
         }
