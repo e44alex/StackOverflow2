@@ -43,7 +43,7 @@ export class DataServiceService {
   getAnswer(id: string): Promise<Answer> {
     return new Promise((resolve, reject) => {
       this.http
-        .get('https://localhost:44360/api/Questions/' + id)
+        .get('https://localhost:44360/api/Answers/' + id)
         .subscribe((data: Answer) => {
           return resolve(data);
         });
