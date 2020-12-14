@@ -1,0 +1,141 @@
+<hr>
+<div class="container bootstrap snippet">
+
+  <div class="row">
+    <div class="col-sm-3">
+      <!--left col-->
+      <div class="row">
+        <div class="col-sm-9">
+          <h1 class="text-white">User name</h1>
+        </div>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-dark text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+        <li class="list-group-item list-group-item-dark text-right"><span
+            class="pull-left"><strong>Shares</strong></span> 125</li>
+        <li class="list-group-item list-group-item-dark text-right"><span
+            class="pull-left"><strong>Likes</strong></span> 13</li>
+        <li class="list-group-item list-group-item-dark text-right"><span
+            class="pull-left"><strong>Posts</strong></span> 37</li>
+        <li class="list-group-item list-group-item-dark text-right"><span
+            class="pull-left"><strong>Followers</strong></span> 78</li>
+      </ul>
+
+    </div>
+    <!--/col-3-->
+    <div class="col-sm-9">
+      <div class="tab-content">
+        <div class="tab-pane active" id="home">
+          <form class="form" action="##" method="post" id="registrationForm">
+
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="email">
+                  <h2 class="text-white">Email</h2>
+                </label>
+                <input disabled type="email" class="form-control" name="email" id="email" placeholder="you@email.com"
+                  title="enter your email." [(ngModel)]="user.email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="first_name">
+                  <h2 class="text-white">First name</h2>
+                </label>
+                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name"
+                  title="enter your first name if any." [(ngModel)]="user.name" [disabled]="!isOwner">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="last_name">
+                  <h2 class="text-white">Last name</h2>
+                </label>
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name"
+                  title="enter your last name if any." [(ngModel)]="user.surname" [disabled]="!isOwner">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="phone">
+                  <h2 class="text-white"> Phone</h2>
+                </label>
+                <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone"
+                  title="enter your phone number if any." [(ngModel)]="user.phoneNumber" [disabled]="!isOwner">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="phone">
+                  <h2 class="text-white"> Position</h2>
+                </label>
+                <input type="text" class="form-control" name="pos" id="pos" placeholder="enter phone"
+                  title="enter your phone number if any." [(ngModel)]="user.position" [disabled]="!isOwner">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6">
+                <label for="phone">
+                  <h2 class="text-white"> Experience</h2>
+                </label>
+                <input type="number" step="0.5" class="form-control" name="exp" id="exp" placeholder="enter phone"
+                  title="enter your phone number if any." [(ngModel)]="user.exerience" [disabled]="!isOwner">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6" *ngIf="isOwner">
+                <label for="password">
+                  <h2 class="text-white">Password</h2>
+                </label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="password"
+                  title="enter your password." >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6" *ngIf="isOwner">
+                <label for="password2">
+                  <h2 class="text-white">Verify</h2>
+                </label>
+                <input type="password" class="form-control" name="password2" id="password2" placeholder="password2"
+                  title="re-enter your password." >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label asp-for="Input.Rating"></label>
+              <div class="progress">
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{'width': user.rating}"  aria-valuemin="0" aria-valuemax="100">{{user.rating}}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-12">
+                <br>
+                <button class="btn btn-lg btn-success" type="submit" (click)="OnSaveButton()"><i
+                    class="glyphicon glyphicon-ok-sign"></i>
+                  Save</button>
+                <button class="btn btn-lg btn-danger ml-5" type="reset" (click)="OnResetButton()"><i
+                    class="glyphicon glyphicon-repeat"></i> Reset</button>
+              </div>
+            </div>
+
+            
+
+          </form>
+
+          <hr>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/col-9-->
+</div>
+<!--/row-->

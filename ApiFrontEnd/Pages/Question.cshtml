@@ -1,0 +1,117 @@
+﻿@page
+@model ApiFrontEnd.Pages.QuestionModel
+@{
+    Layout = "_Layout";
+    string Username = "";
+
+    try
+    {
+        Username = HttpContext.Request.Cookies["user"];
+    }
+    catch (Exception e)
+    {
+        // ignored
+    }
+
+}
+
+<h2>@Model.Question.Topic</h2>
+@* The question *@
+<div>
+    @if (Model.Question.Opened)
+    {
+        <p>
+            Discussion is opened
+        </p>
+    }
+    else
+    {
+        <p>
+            Discussion closed
+        </p>
+    }
+</div>
+
+<div class="card mb-5">
+    <div class="card-header">
+        <h2>
+            @Model.Question.Topic
+        </h2>
+    </div>
+    <div class="card-body">
+        @Model.Question.Body
+    </div>
+    <div class="card-footer">Created by: <a>@Model.Question.Creator.Name @Model.Question.Creator.Surname</a> on @Model.Question.DateCreated</div>
+</div>
+
+@* list of answers *@
+
+<div>
+    <h4>
+        @if (@Model.Question.Answers != null && @Model.Question.Answers.Count > 0)
+        {
+            <p>@Model.Question.Answers.Count answers</p>
+        }
+        else
+        {
+            <p>No answers yet</p>
+        }
+    </h4>
+    <div class="mt-5">
+        @foreach (var answer in Model.Question.Answers)
+        {
+            @try
+            {
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <a asp-page="User" asp-route-username="@answer.Creator.Login">@answer.Creator.Name @answer.Creator.Surname</a>
+                    </div>
+                    <div class="card-body">@answer.Body</div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                @answer.DateCreated
+
+                            </div>
+                            <div class="col-sm-1">
+                                @if (Username != "")
+                                {
+                                    <form method="post">
+                                        <input type="hidden" asp-for="@answer.Id" />
+                                        <input type="hidden" asp-for="Question.Id" />
+                                        <input type="submit" class="btn btn-secondary" value="Like" asp-page-handler="Like" />
+                                    </form>
+                                }
+                            </div>
+                            <div class="col-sm-2">
+                                <p>
+                                    @answer.Users.Count() liked this
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            catch (Exception)
+            {
+
+            }
+            
+        }
+    </div>
+</div>
+
+@if (Username != "" && Model.Question.Opened)
+{
+    @* add answer block *@
+    <div>
+        <h4>Add your own answer:</h4>
+    </div>
+    <div>
+        <form method="post">
+            <input asp-for="Question.Id" type="text" hidden="true" />
+            <textarea name="Body" class="form-control mb-5" placeholder="Enter your answer"></textarea>
+            <input type="submit" value="Send" class="btn btn-primary"/>
+        </form>
+    </div>
+}  

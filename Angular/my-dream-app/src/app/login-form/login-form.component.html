@@ -1,0 +1,25 @@
+<div class="col-md-7 offset-2 jumbotron jumbotron-fluid">
+  <div class="col-md-8 offset-2 mt-4">
+    <form method="get" #loginForm="ngForm" (ngSubmit)="OnLogin(loginForm)">
+      <div class="form-group">
+        <label for="username">Email</label>
+        <input required type="email" class="form-control" name="usernname" id="username" aria-describedby="emailHelpId"
+          placeholder="email@example.com" [(ngModel)]="username" #name="ngModel">
+        <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+          Email not valid
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="">Password</label>
+        <input required type="password" class="form-control" name="pasword" id="password" placeholder="your password"
+          [(ngModel)]="password" #passw="ngModel">
+        <div [hidden]="passw.valid || passw.untouched" class="alert alert-danger">
+          Password required
+        </div>
+      </div>
+      <div class="col-md-2 offset-5">
+        <button type="submit" class="btn btn-primary mt-3">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

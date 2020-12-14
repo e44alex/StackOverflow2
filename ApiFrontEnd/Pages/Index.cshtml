@@ -1,0 +1,62 @@
+﻿@page "{handler?}"
+@model ApiFrontEnd.IndexModel
+@{
+    Layout = "_Layout";
+    string Username = "";
+
+    try
+    {
+        Username = HttpContext.Request.Cookies["user"];
+    }
+    catch (Exception e)
+    {
+        // ignored
+    }
+}
+
+<form class="form-inline" method="get" > 
+    <span class="ml-5">
+        <input name="searchText" class="form-control form-control-lg ml-3" type="text" placeholder="Search" aria-label="Search" >
+    </span>
+    <span>
+        <input type="submit" value="Search" class="btn btn-secondary"/>
+    </span>
+</form>
+
+<div class="row mb-5">
+    <div class="col-lg-10">
+        <h1>Questions</h1>
+    </div>
+    @if (Username != "")
+    {
+        <div class="col-lg-2">
+            <a asp-page="./QuestionCreate" class="btn btn-secondary">Ask a question</a>
+        </div>
+    }
+</div>
+
+<div >
+    @foreach (var question in Model.Questions)
+    {
+        <div class="card mb-2">
+            <div class="card-header">
+                <a asp-page="./Question" asp-route-id="@question.Id">
+                    <h2>@question.Topic</h2>
+                </a>
+            </div>
+            <div class="card-body">
+                @if (question.Body.Length > 100)
+                {
+                    @question.Body.Substring(0, 100)
+                    ;
+                    <p>...</p>
+                }
+                else
+                {
+                    @question.Body
+                }
+            </div>
+            <div class="card-footer">Created by: <a asp-page="./User" asp-route-username="@question.Creator.Email">@question.Creator.Name @question.Creator.Surname</a> on @question.DateCreated</div>
+        </div>
+    }
+</div>

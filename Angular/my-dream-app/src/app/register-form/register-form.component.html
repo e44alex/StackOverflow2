@@ -1,0 +1,36 @@
+<div class="col-md-7 offset-2 jumbotron jumbotron-fluid">
+  <div class="col-md-8 offset-2 mt-4">
+    <form method="get" action="">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input required type="text" class="form-control" name="Name" id="" aria-describedby="helpId" placeholder="" [(ngModel)]="name"  #naim="ngModel">
+          <div class="text text-danger" [hidden]="naim.valid || naim.untouched">Name required</div>
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname</label>
+            <input required type="text" class="form-control" name="Surname" id="" aria-describedby="helpId" placeholder="" [(ngModel)]="surname" #sur="ngModel">
+            <div class="text text-danger" [hidden]="sur.valid || sur.untouched">Surname required</div>
+          </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input required type="email" class="form-control" name="Email" id="" aria-describedby="emailHelpId" placeholder="email@example.com" [(ngModel)]="email" #e_mail="ngModel">
+          <div class="text text-danger" [hidden]="e_mail.valid || e_mail.untouched">Email required</div>
+        </div>
+        <div class="form-group">
+          <label for="">Password</label>
+          <input required type="password" class="form-control" name="Password" id="" placeholder="" [(ngModel)]="password" #passw="ngModel">
+          <div class="text text-danger" [hidden]="passw.valid || passw.untouched">Password required</div>
+        </div>
+        <div class="form-group">
+            <label for="">Password confirmation</label>
+            <input required type="password" class="form-control" name="PasswordConfirmation" id="" placeholder="" [(ngModel)]="passwConfirm" #passwConf="ngModel">
+            <div class="text text-danger" [hidden]="naim.valid || naim.untouched">Password confirmation required</div>
+            <div class="text text-danger" [hidden]="passw.value==passwConf.value || passwConf.untouched">Password are not equal</div>
+        </div>
+        <div class="col-sm-2 offset-4 ">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+</div>
+
+</div>

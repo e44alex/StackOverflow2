@@ -1,0 +1,18 @@
+<ng-container *ngIf="!getAuth; else elseTemplate">
+    <!-- If not authenticated show links to login and register forms -->
+  <span class="partial-lnk">
+    <a class="btn btn-outline-light" [routerLink]="['/Register']">Register</a>
+  </span>
+  <span class="partial-lnk">
+    <a class="btn btn-outline-light" [routerLink]="['/Login']">Login</a>
+  </span>
+</ng-container>
+<ng-template #elseTemplate>
+    <!-- Else show links personal page and logout -->
+  <span class="partial-lnk">
+    <a class="btn btn-outline-light" [routerLink]="['/User', getID]">Hello, {{getEmail}}</a>
+  </span>
+  <span class="partial-lnk">
+    <a class="btn btn-outline-light" (click)="OnLogout()">Log out</a>
+  </span>
+</ng-template>
