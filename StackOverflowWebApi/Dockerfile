@@ -7,14 +7,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["StackOverflowWebApi/StackOverflowWebApi.csproj", "StackOverflowWebApi/"]
+COPY ["./StackOverflowWebApi.csproj", "StackOverflowWebApi/"]
 RUN dotnet restore "StackOverflowWebApi/StackOverflowWebApi.csproj"
 COPY . .
 WORKDIR "/src/StackOverflowWebApi"
 RUN dotnet build "StackOverflowWebApi.csproj" -c Release -o /app/build
 EXPOSE 80/tcp
-# RUN chmod +x ./entrypoint.sh
-# CMD /bin/bash ./entrypoint.sh
+#RUN chmod +x ./entrypoint.sh
+CMD /bin/bash ./entrypoint.sh
 
 FROM build AS publish
 RUN dotnet publish "StackOverflowWebApi.csproj" -c Release -o /app/publish
